@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
     EditText input;
-    Button Backward ,Nextward,Add_Url;
+    Button Backward ,Nextward, Add_Url;
     Picasso picasso;
     List<String> listImage;
     int i = 1;
@@ -34,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
         Add_Url.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = input.getText().toString().trim();
-                Add_Image(url);
+                MyDatabaseHelper myDB = new MyDatabaseHelper(MainActivity.this);
+                myDB.addLink(input.getText().toString().trim());
+//                String url = input.getText().toString().trim();
+//                Add_Image(url);
             }
         });
         Backward.setOnClickListener(new View.OnClickListener() {
@@ -65,27 +67,27 @@ public class MainActivity extends AppCompatActivity {
 //        listImage.add("https://tinyurl.com/2fehtenc");
 //        listImage.add("https://tinyurl.com/33dm7erv");
     }
-    public void Add_Image(String url){
-        picasso.get()
-                .load(url).into(imageView, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        listImage.add(url);
-                        i = listImage.size() - 1;
-                        showImage(i);
-                        Toast.makeText(MainActivity.this
-                                , "Add Success", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onError(Exception e) {
-                        if(listImage.size() >0){
-                            showImage(i);
-                        }
-                        Toast.makeText(MainActivity.this
-                                , "Failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
+//    public void Add_Image(String url){
+//        picasso.get()
+//                .load(url).into(imageView, new Callback() {
+//                    @Override
+//                    public void onSuccess() {
+//                        listImage.add(url);
+//                        i = listImage.size() - 1;
+//                        showImage(i);
+//                        Toast.makeText(MainActivity.this
+//                                , "Add Success", Toast.LENGTH_SHORT).show();
+//                    }
+//                    @Override
+//                    public void onError(Exception e) {
+//                        if(listImage.size() >0){
+//                            showImage(i);
+//                        }
+//                        Toast.makeText(MainActivity.this
+//                                , "Failed", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
     public void showImage(int position){
         picasso.get().load(listImage.get(position)).into(imageView);
     }
