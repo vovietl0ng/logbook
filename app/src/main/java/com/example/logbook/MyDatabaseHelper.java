@@ -2,6 +2,7 @@ package com.example.logbook;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -12,7 +13,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "Image.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     private static final String TABLE_NAME = "link_image";
     private static final String COLUMN_ID = "_id";
@@ -39,16 +40,20 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addLink(String title) {
+    public void addLink(String title) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
         cv.put(COLUMN_IMAGE, title);
-        long result = db.insert(TABLE_NAME, null, cv);
-        if(result == 1) {
-            Toast.makeText(context, "FAILED", Toast.LENGTH_SHORT).show();
-        }else {
-            Toast.makeText(context, "SUCCSESFULLY", Toast.LENGTH_SHORT).show();
+        long result = db.insertOrThrow(TABLE_NAME, null, cv);
+    }
+    Cursor readAllData () {
+        String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null) {
+            cursor = db.rawQuery(query, null);
         }
+        return cursor;
     }
 }
