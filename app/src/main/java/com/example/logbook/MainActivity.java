@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         picasso = new Picasso.Builder(this).build();
         listImage = new ArrayList<>();
         listImage.add("https://tinyurl.com/ubedmu4m");
+        listImage.add("https://tinyurl.com/477fpxw9");
         listImage.add("https://tinyurl.com/2fehtenc");
         listImage.add("https://tinyurl.com/33dm7erv");
         showImage(i);
