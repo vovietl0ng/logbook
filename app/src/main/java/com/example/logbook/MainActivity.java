@@ -1,13 +1,10 @@
 package com.example.logbook;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.squareup.picasso.Picasso;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
