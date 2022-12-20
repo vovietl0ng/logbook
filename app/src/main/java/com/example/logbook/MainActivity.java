@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Picasso picasso;
     List<String> listImage;
     MyDatabaseHelper myDB;
-    int i = 1;
+    int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,10 +97,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    //show image
     public void showImage(int position){
         picasso.get().load(listImage.get(position)).into(imageView);
     }
+
+    //get data from database
     public List<String> storeDataInArrays () {
         Cursor cursor = myDB.readAllData();
             List<String> storeData = new ArrayList<>();
